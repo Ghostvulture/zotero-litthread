@@ -34,11 +34,11 @@ LitThread 是一个面向 Zotero 的 AI 阅读与知识积累插件。在文献�
 
 ## 安装与升级
 
-当前版本：**0.3.3**。插件清单允许 **Zotero 7.0–10.0.x** 安装。
+当前版本：**0.3.4**。插件清单允许 **Zotero 7.0–10.0.x** 安装。
 
 本版通过 115 项单元测试，Linux Zotero 7.0.32 / 10.0.7 各通过 70 项原生检查，以及 31 项覆盖升级检查。Windows / macOS 尚未原生实测。
 
-1. 准备 `zotero-litthread-0.3.3.xpi`：可使用发行包附带的 XPI，或按下方步骤自行构建。发布者可将它上传到 GitHub Releases。
+1. 从 [v0.3.4 Release](https://github.com/Ghostvulture/zotero-litthread/releases/tag/v0.3.4) 下载 `zotero-litthread-0.3.4.xpi`，或按下方步骤自行构建。
 2. 在 Zotero 打开 **工具 → 插件**，通过齿轮菜单选择 **从文件安装插件**，选中 XPI；也可以拖入插件窗口。
 3. 在 Zotero **主窗口**选择文献，或在主窗口标签页打开 PDF，展开右侧 **研脉 · 科研助手**。
 
@@ -80,7 +80,7 @@ research-companion/
 
 ## 数据与当前边界
 
-- **AI 请求会发送研究材料。** 点击发送后，问题、相关正文片段、选段、批注、部分历史和 memory 等会交给你设置的 API 服务商；分组知识脉络还包含有限的分组目录。插件没有自动整库上传或遥测。
+- **AI 请求会发送研究材料。** 点击发送后，问题、相关正文片段、选段、批注、部分历史和 memory 等会交给你设置的 API 服务商；每次问答包含有限的当前分组目录。同组对照问题和知识脉络任务还会读取最多 6 篇其他文献的有限正文片段。插件没有自动整库上传或遥测。
 - **Key 保存在本机 Zotero 登录管理器。** 不可用时仅保留于会话；Key 不写入知识文件。不要把 Key 或私有论文贴到公开 Issue。
 - **当前是有限片段检索。** 根据问题关键词选择文本，不是整库向量检索，也不会自动追踪引用／被引网络。回答中的 `[F001]` 是本次材料编号，不是 PDF 页码。
 - **没有 OCR 或图片理解。** 扫描件需先做 OCR；论文中的表格和公式仍可能提取错序。AI 回答需要对照原文核实。
@@ -104,8 +104,8 @@ Windows 没有 `python3` 命令时，可使用 `py -3 scripts/build.py`。生成
 
 ```text
 dist/
-├── zotero-litthread-0.3.3.xpi
-├── zotero-litthread-0.3.3-source.zip
+├── zotero-litthread-0.3.4.xpi
+├── zotero-litthread-0.3.4-source.zip
 └── SHA256SUMS.txt
 ```
 

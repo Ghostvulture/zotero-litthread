@@ -1,6 +1,6 @@
 {
   "name": "zotero-litthread",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "private": true,
   "description": "Zotero 7–10 local collection memory and grounded DeepSeek reading companion",
   "license": "MIT",

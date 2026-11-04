@@ -714,6 +714,33 @@
       this.cancelButton.disabled = true; this.cancelButton.hidden = true; this.modelSelect.disabled = false;
       this.renderHistory();
     }
+    async collectionContext(question, mode, collection, item, token) {
+      const active = () => this.current(token) && !this.controller?.signal.aborted;
+      let items = await this.app.data.listItems(collection.id, collection.libraryID);
+      if (!active()) return null;
+      if (!collection.id) items = items.filter(meta => !(this.app.Zotero.Items.get(meta.id)?.getCollections?.() || []).length);
+      const compare = mode === "genealogy" || /对照|对比|比较|其他|其它|同组|文件夹|分组|综述|脉络|compare|comparison|other papers|collection|literature review/i.test(question);
+      const peers = [];
+      const candidates = items.filter(meta => meta.key !== item.key);
+      if (compare) {
+        const words = (question.toLowerCase().match(/[a-z0-9π][a-z0-9π._-]{1,}/g) || []);
+        const score = meta => words.reduce((sum, word) => sum + (String(meta.title || "").toLowerCase().includes(word) ? 1 : 0), 0);
+        candidates.sort((a, b) => score(b) - score(a));
+        for (const meta of candidates.slice(0, 6)) {
+          if (!active()) return null;
+          this.status(`正在读取分组「${collection.path || collection.name}」的对照材料：${peers.length + 1}/${Math.min(6, candidates.length)}…`);
+          try {
+            const read = await this.app.data.readText(meta.id, { maxChars: 120000 });
+            peers.push({ item: meta, text: read.text, status: read.warning || "仅选取相关片段，不代表完整阅读" });
+          } catch (_) {
+            peers.push({ item: meta, text: "", status: "本地正文读取失败，仅有书目元数据" });
+          }
+        }
+      }
+      if (!active()) return null;
+      const coverage = `当前分组：${collection.path || collection.name}；直接成员 ${items.length} 篇（不含子分组）；其他文献正文可提取 ${peers.filter(p => p.text?.trim()).length}/${candidates.length} 篇，本次尝试 ${peers.length} 篇。`;
+      return { items, peers, coverage };
+    }
     async send() {
       if (this.busy || this.loading) return;
       if (!this.item || !this.collection || !this.saved) throw new Error("请等待文献与分组加载完成。");
@@ -734,6 +761,9 @@
       this.status("正在提取当前文献并检索相关片段…");
       try {
         const read = await this.app.data.readText(this.attachment || this.item);
+        if (!this.current(token) || this.controller.signal.aborted) return;
+        const context = await this.collectionContext(question, mode, collection, item, token);
+        if (!context) return;
         const annotations = this.attachment ? await this.app.data.annotations(this.attachment) : [];
         const saved = await this.app.memory.read(collection, folder);
         if (!this.current(token)) return;
@@ -742,10 +772,10 @@
         const history = await this.app.memory.readConversation(collection, item.key, folder);
         if (!this.current(token) || this.controller.signal.aborted) return;
         const messages = root.RCAI.buildMessages({ question, item, text: read.text, selection, annotations,
-          memory: saved.memory.slice(0, 5500) + "\n\n最近卡片：\n" + cards, history, mode,
-          collectionItems: mode === "genealogy" ? this.collectionItems : [],
+          memory: [saved.memory.trim().slice(0, 5500), cards ? "最近卡片：\n" + cards : ""].filter(Boolean).join("\n\n"), history, mode,
+          collectionItems: context.items, relatedDocuments: context.peers, collectionCoverage: context.coverage,
         });
-        this.status((read.warning ? read.warning + "\n" : "") + "正在请求 " + config.model + "…（正文为相关片段，未声称读取整篇全文）");
+        this.status(context.coverage + "\n" + (read.warning ? read.warning + "\n" : "") + "正在请求 " + config.model + "…（正文为相关片段，未声称读取整篇全文）");
         const result = await this.app.ai.complete({ ...config, apiKey, messages, signal: this.controller.signal });
         if (!this.current(token) || this.controller.signal.aborted) return;
         const content = result.text + (result.truncated ? "\n\n[回答达到输出上限，请缩小问题或继续提问。]" : "");
@@ -758,7 +788,7 @@
         if (mode in QUESTIONS && mode !== "genealogy") this.saveType.value = mode;
         const persisted = await this.app.memory.appendConversation(collection, item.key, turns, folder);
         if (this.current(token)) { this.history = persisted.messages; this.renderHistory(); }
-        if (this.current(token)) this.status((read.warning ? read.warning + "\n" : "") + "回答已保存到本组对话。可继续提问，或保存为卡片。" + (mode === "genealogy" ? "知识脉络草稿可保存为 memory。" : ""));
+        if (this.current(token)) this.status(context.coverage + "\n" + (read.warning ? read.warning + "\n" : "") + "回答已保存到本组对话。可继续提问，或保存为卡片。" + (mode === "genealogy" ? "知识脉络草稿可保存为 memory。" : ""));
       } catch (error) {
         if (this.current(token)) throw error;
       } finally { if (this.current(token)) this.finish(); }

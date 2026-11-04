@@ -113,8 +113,8 @@
       return result;
     };
     const metadata = source => copyTextFields(source,
-      ["title", "date", "DOI", "doi", "key", "itemType", "publicationTitle", "creators", "year", "tags"]);
-    const packet = copyTextFields(input, ["scope", "fulltext_status", "collection_scope"]);
+      ["title", "date", "DOI", "doi", "key", "itemType", "publicationTitle", "creators", "year", "tags", "abstract", "citation"]);
+    const packet = copyTextFields(input, ["scope", "fulltext_status", "collection_scope", "collection_coverage"]);
     if (input.current_item) {
       packet.current_item = { ...copyTextFields(input.current_item, ["source_id"]),
         bibliographic_metadata: metadata(input.current_item.bibliographic_metadata) };
@@ -129,6 +129,12 @@
     if (Array.isArray(input.collection_items)) {
       packet.collection_items = input.collection_items.map(item => ({
         ...copyTextFields(item, ["source_id"]), metadata: metadata(item && item.metadata),
+      }));
+    }
+    if (Array.isArray(input.related_documents)) {
+      packet.related_documents = input.related_documents.map(document => ({
+        ...copyTextFields(document, ["source_id", "status"]), metadata: metadata(document.metadata),
+        excerpts: (Array.isArray(document.excerpts) ? document.excerpts : []).map(excerpt => copyTextFields(excerpt, ["source_id", "text"]))
       }));
     }
     if (Array.isArray(input.previous_conversation)) {

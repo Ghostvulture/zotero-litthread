@@ -223,3 +223,42 @@ test("an article switch while credentials are loading cannot send the old questi
   assert.equal(reads, 0); assert.equal(f.view.item, f.otherParent);
   assert.equal(f.view.busy, false);
 });
+
+test("ordinary comparison reads fresh selected collection peers, bounds work and tolerates missing PDFs", async () => {
+  const f = fixture(); const reads = [];
+  f.view.controller = new AbortController();
+  f.app.data.listItems = async (id, libraryID) => {
+    assert.equal(id, 10); assert.equal(libraryID, 1);
+    return [f.parent, ...Array.from({ length: 9 }, (_, i) => ({ id: i + 2, key: 'PEER' + i, title: i === 8 ? 'VLA methods' : 'Paper' }))];
+  };
+  f.app.data.readText = async id => { reads.push(id); if (id === 2) throw new Error('missing'); return { text: 'Peer evidence' }; };
+  const context = await f.view.collectionContext('和文件夹中的其他 VLA 相关文献对照', 'chat', f.view.collection, f.parent, f.view.epoch);
+  assert.equal(context.items.length, 10); assert.equal(reads.length, 6);
+  assert.equal(reads[0], 10); assert.ok(!reads.includes(1));
+  assert.equal(context.peers.filter(p => p.text).length, 5);
+  assert.match(context.coverage, /5\/9/);
+});
+
+test("collection retrieval stops after cancellation or article switch", async () => {
+  const f = fixture(), gate = deferred(); let count = 0;
+  f.view.controller = new AbortController();
+  f.app.data.readText = async () => { count++; return gate.promise; };
+  const pending = f.view.collectionContext('对照其他文献', 'chat', f.view.collection, f.parent, f.view.epoch);
+  await new Promise(resolve => setImmediate(resolve));
+  f.view.controller.abort(); gate.resolve({ text: 'late' });
+  assert.equal(await pending, null); assert.equal(count, 1);
+});
+
+test("ordinary paragraph questions include the catalog without reading other PDFs", async () => {
+  const f = fixture(); f.app.data.readText = () => { throw new Error('unexpected read'); };
+  const context = await f.view.collectionContext('解释这段公式', 'chat', f.view.collection, f.parent, f.view.epoch);
+  assert.equal(context.items.length, 2); assert.equal(context.peers.length, 0);
+});
+
+test("unfiled context excludes filed papers and never scans their text", async () => {
+  const f = fixture(); const read = [];
+  f.app.data.readText = async id => { read.push(id); return { text: 'unfiled' }; };
+  const context = await f.view.collectionContext('对照其他', 'chat', { id: null, key: 'unfiled', libraryID: 1, name: '未分组' }, f.otherParent, f.view.epoch);
+  assert.deepEqual(context.items.map(item => item.id), [2]);
+  assert.deepEqual(read, []);
+});

@@ -28,11 +28,11 @@ Screenshots use synthetic papers, answers and account balances in an isolated te
 
 ## Install
 
-Version **0.3.3** declares compatibility with **Zotero 7.0–10.0.x**. Declared compatibility is not a guarantee of testing on every platform; see [test coverage](docs/TESTING.md).
+Version **0.3.4** declares compatibility with **Zotero 7.0–10.0.x**. Declared compatibility is not a guarantee of testing on every platform; see [test coverage](docs/TESTING.md).
 
 This version passed 115 unit tests, 70 native checks on each of Linux Zotero 7.0.32 and 10.0.7, and 31 hot-upgrade checks. Windows and macOS have not been tested natively.
 
-1. Obtain `zotero-litthread-0.3.3.xpi` from the distribution or build it using the commands below. Maintainers can attach it to a GitHub Release.
+1. Download `zotero-litthread-0.3.4.xpi` from the [v0.3.4 Release](https://github.com/Ghostvulture/zotero-litthread/releases/tag/v0.3.4), or build it using the commands below.
 2. Open Zotero's plugin manager under **Tools**, then use **Install Add-on From File** or drag the XPI into the manager.
 3. Select a paper or open its PDF in a **main-window tab**, then expand the assistant section in the right sidebar.
 
@@ -83,3 +83,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development and bug reports, and [doc
 [MIT](LICENSE). The original Research Companion contributors notice is retained. KaTeX 0.19.1 is also MIT licensed; see [third-party notices](THIRD_PARTY_NOTICES.md).
 
 LitThread is an independent community project, not an official Zotero, DeepSeek or OpenAI product.
+
+Collection comparisons in chat now include bounded local excerpts from up to six other direct members of the selected collection, with coverage and missing-text status. Collection memory remains a separately saved synthesis, not a cache of every paper.

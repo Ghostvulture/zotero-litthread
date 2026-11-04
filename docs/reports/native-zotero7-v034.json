@@ -1,0 +1,304 @@
+{
+  "pluginVersion": "0.3.4",
+  "checks": [
+    {
+      "name": "main-window",
+      "passed": true
+    },
+    {
+      "name": "section-registration",
+      "passed": true
+    },
+    {
+      "name": "native-network-primitives",
+      "passed": true
+    },
+    {
+      "name": "production-xpi-install-validation",
+      "passed": true
+    },
+    {
+      "name": "production-xpi-version-compatible",
+      "passed": true
+    },
+    {
+      "name": "native-collections",
+      "passed": true
+    },
+    {
+      "name": "native-collection-items",
+      "passed": true
+    },
+    {
+      "name": "native-attachment-path",
+      "passed": true
+    },
+    {
+      "name": "native-pdf-extraction",
+      "passed": true
+    },
+    {
+      "name": "native-item-details",
+      "passed": true
+    },
+    {
+      "name": "native-sidebar-render",
+      "passed": true
+    },
+    {
+      "name": "native-default-chat-page",
+      "passed": true
+    },
+    {
+      "name": "native-settings-navigation-api",
+      "passed": true
+    },
+    {
+      "name": "native-settings-page",
+      "passed": true
+    },
+    {
+      "name": "native-settings-save",
+      "passed": true
+    },
+    {
+      "name": "native-key-store",
+      "passed": true
+    },
+    {
+      "name": "native-windows-host-css-simulation",
+      "passed": true
+    },
+    {
+      "name": "native-settings-return-to-chat",
+      "passed": true
+    },
+    {
+      "name": "native-model-dropdown-options",
+      "passed": true
+    },
+    {
+      "name": "native-model-dropdown-persists",
+      "passed": true
+    },
+    {
+      "name": "native-model-kept-in-settings",
+      "passed": true
+    },
+    {
+      "name": "native-composer-send-availability",
+      "passed": true
+    },
+    {
+      "name": "native-chat-request-and-response",
+      "passed": true
+    },
+    {
+      "name": "native-chat-fresh-collection-catalog",
+      "passed": true
+    },
+    {
+      "name": "native-chat-peer-fulltext-in-request",
+      "passed": true
+    },
+    {
+      "name": "native-empty-memory-and-annotations-omitted",
+      "passed": true
+    },
+    {
+      "name": "native-model-used-by-request",
+      "passed": true
+    },
+    {
+      "name": "native-markdown-headings-lists",
+      "passed": true
+    },
+    {
+      "name": "native-markdown-code-table",
+      "passed": true
+    },
+    {
+      "name": "native-markdown-citation-retained",
+      "passed": true
+    },
+    {
+      "name": "native-mathml-inline-and-block",
+      "passed": true
+    },
+    {
+      "name": "native-mathml-structure-and-code-isolation",
+      "passed": true
+    },
+    {
+      "name": "native-markdown-dangerous-html-isolated",
+      "passed": true
+    },
+    {
+      "name": "native-balance-ui-available",
+      "passed": true
+    },
+    {
+      "name": "native-balance-display",
+      "passed": true
+    },
+    {
+      "name": "native-balance-get-only-with-auth",
+      "passed": true
+    },
+    {
+      "name": "native-balance-preserves-history",
+      "passed": true
+    },
+    {
+      "name": "native-balance-unsupported-provider-no-network",
+      "passed": true
+    },
+    {
+      "name": "native-navigation-preserves-draft",
+      "passed": true
+    },
+    {
+      "name": "native-navigation-preserves-history",
+      "passed": true
+    },
+    {
+      "name": "native-card-save",
+      "passed": true
+    },
+    {
+      "name": "native-card-source-sidecar",
+      "passed": true
+    },
+    {
+      "name": "native-conversation-save",
+      "passed": true
+    },
+    {
+      "name": "native-memory-save",
+      "passed": true
+    },
+    {
+      "name": "native-completed-reply-jump-buttons",
+      "passed": true
+    },
+    {
+      "name": "native-jump-to-corresponding-question",
+      "passed": true
+    },
+    {
+      "name": "native-memory-backup",
+      "passed": true
+    },
+    {
+      "name": "native-inventory-export",
+      "passed": true
+    },
+    {
+      "name": "native-reader-details",
+      "passed": true
+    },
+    {
+      "name": "native-reader-current-attachment",
+      "passed": true
+    },
+    {
+      "name": "native-model-persisted-to-reader-view",
+      "passed": true
+    },
+    {
+      "name": "native-reader-selection-handler",
+      "passed": true
+    },
+    {
+      "name": "native-supplement-exact-binding",
+      "passed": true
+    },
+    {
+      "name": "native-supplement-text",
+      "passed": true
+    },
+    {
+      "name": "native-selection-isolation",
+      "passed": true
+    },
+    {
+      "name": "native-chat-internal-scroll",
+      "passed": true
+    },
+    {
+      "name": "native-composer-present",
+      "passed": true
+    },
+    {
+      "name": "native-bottom-composer-layout",
+      "passed": true
+    },
+    {
+      "name": "native-bottom-controls-within-window",
+      "passed": true
+    },
+    {
+      "name": "native-default-compact-sidebar-width",
+      "passed": true
+    },
+    {
+      "name": "native-default-no-horizontal-overflow",
+      "passed": true
+    },
+    {
+      "name": "native-reader-pane-resize-layout",
+      "passed": true
+    },
+    {
+      "name": "native-reader-pane-resize-preserves-state",
+      "passed": true
+    },
+    {
+      "name": "native-reader-pane-resize-settings-and-stop",
+      "passed": true
+    },
+    {
+      "name": "native-reader-pane-long-content-local-scroll",
+      "passed": true
+    },
+    {
+      "name": "native-reader-settings-balance",
+      "passed": true
+    },
+    {
+      "name": "native-settings-screenshot-without-key",
+      "passed": true
+    },
+    {
+      "name": "native-screenshot-default-chat-page",
+      "passed": true
+    },
+    {
+      "name": "native-empty-chat-state",
+      "passed": true
+    },
+    {
+      "name": "native-narrow-window-bottom-controls",
+      "passed": true
+    },
+    {
+      "name": "native-narrow-no-horizontal-overflow",
+      "passed": true
+    },
+    {
+      "name": "native-shutdown",
+      "passed": true
+    },
+    {
+      "name": "native-resize-observer-cleanup",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "complete": true,
+  "launcher": {
+    "exitCode": 0,
+    "timedOut": false,
+    "operatingSystem": "Linux"
+  }
+}

@@ -232,6 +232,8 @@ test("card sidecars preserve request-local evidence and whitelist packet content
     memory: { source_id: "M1", text: "Memory interpretation", status: "Unverified" },
     collection_items: [{ source_id: "C1", metadata: { title: "Other paper", doi: "10.1000/other", localPath: "/secret/other.pdf" } }],
     collection_scope: "1/1 metadata entries",
+    collection_coverage: "VLA 2 papers",
+    related_documents: [{ source_id: "R1", metadata: { title: "Peer", abstract: "Abstract", localPath: "/secret/peer.pdf" }, excerpts: [{ source_id: "R1F1", text: "Peer evidence 99", apiKey: "unrelated-runtime-credential" }] }],
     previous_conversation: [{ role: "user", content: "Earlier research question" }],
   };
   const saved = await store.saveRecord(groupA, { ...record, id: "with-sources", sources });
@@ -239,6 +241,9 @@ test("card sidecars preserve request-local evidence and whitelist packet content
   const sidecar = files.get(saved.sourcesPath);
   const packet = JSON.parse(sidecar);
   assert.equal(packet.schemaVersion, 1);
+  assert.equal(packet.materials.related_documents[0].excerpts[0].text, "Peer evidence 99");
+  assert.equal(packet.materials.related_documents[0].metadata.abstract, "Abstract");
+  assert.equal(packet.materials.collection_coverage, "VLA 2 papers");
   assert.equal(packet.recordID, "with-sources");
   assert.equal(packet.materials.excerpts[0].source_id, "F001");
   assert.equal(packet.materials.excerpts[0].text, sources.excerpts[0].text);

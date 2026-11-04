@@ -335,7 +335,7 @@
       const question = clip(opts.question || "请帮助我理解当前文献。", LIMITS.question);
       const mode = Object.prototype.hasOwnProperty.call(MODES, opts.mode) ? opts.mode : "chat";
       const selection = clip(opts.selection && typeof opts.selection === "object" ? opts.selection.text : opts.selection, LIMITS.selection);
-      const excerpts = selectExcerpts(opts.text || "", question + " " + selection.slice(0, 1000), LIMITS.document);
+      const excerpts = selectExcerpts(opts.text || "", question + " " + selection.slice(0, 1000), (opts.relatedDocuments?.length ? 18000 : LIMITS.document));
       const pack = {
         scope: "这是本次发送的有限材料，不保证已读取全文；来源编号只在本次材料包内有效，F 编号不是 PDF 页码。",
         current_item: { source_id: "I1", bibliographic_metadata: metadata(opts.item) },
@@ -354,9 +354,9 @@
             annotation.comment || annotation.annotationComment ? "个人批注：" + (annotation.comment || annotation.annotationComment) : ""
           ].filter(Boolean).join("\n");
         }).join("\n\n");
-        pack.annotations = { source_id: "A1", text: clip(value, LIMITS.annotations), status: "批注含个人解读，不自动等于作者观点" };
+        if (String(value || "").trim()) pack.annotations = { source_id: "A1", text: clip(value, LIMITS.annotations), status: "批注含个人解读，不自动等于作者观点" };
       }
-      if (opts.memory) pack.memory = { source_id: "M1", text: clip(typeof opts.memory === "string" ? opts.memory : JSON.stringify(opts.memory), LIMITS.memory), status: "待核实的分组记忆，不作为新增原文证据" };
+      if (opts.memory && String(opts.memory).trim()) pack.memory = { source_id: "M1", text: clip(typeof opts.memory === "string" ? opts.memory : JSON.stringify(opts.memory), LIMITS.memory), status: "待核实的分组记忆，不作为新增原文证据" };
       if (Array.isArray(opts.collectionItems)) {
         const items = [], limit = Math.min(opts.collectionItems.length, 100);
         let remaining = LIMITS.collection;
@@ -369,6 +369,26 @@
         }
         pack.collection_items = items;
         pack.collection_scope = "仅提供 " + items.length + "/" + opts.collectionItems.length + " 条书目元数据，不能据此声称读过各篇全文或核实引用关系。";
+      }
+      if (opts.collectionCoverage) pack.collection_coverage = clip(opts.collectionCoverage, 1000);
+      if (Array.isArray(opts.relatedDocuments) && opts.relatedDocuments.length) {
+        pack.related_documents = [];
+        let remaining = 15000;
+        for (const [index, document] of opts.relatedDocuments.slice(0, 6).entries()) {
+          const sourceID = "R" + (index + 1);
+          const paperMetadata = metadata(document.item);
+          const excerptBudget = Math.max(200, 2300 - JSON.stringify(paperMetadata).length - 400);
+          const entry = { source_id: sourceID, metadata: paperMetadata,
+            status: clip(document.status || "仅提供有限片段", 300),
+            excerpts: selectExcerpts(document.text || "", question, excerptBudget).map((excerpt, i) => ({
+              source_id: sourceID + "F" + (i + 1), text: excerpt.text
+            })) };
+          const size = JSON.stringify(entry).length;
+          if (size > remaining) break;
+          remaining -= size;
+          pack.related_documents.push(entry);
+        }
+        pack.collection_scope = (pack.collection_scope || "") + " 同组正文见 related_documents，R 编号标识其他论文，其片段可用于对照；无片段者仅能讨论元数据。覆盖情况见 collection_coverage；未发送的文献不得声称已读。";
       }
       // History stays inside the untrusted data packet instead of becoming
       // executable system-role messages. Keep recent turns within a hard budget.

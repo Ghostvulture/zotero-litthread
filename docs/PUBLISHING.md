@@ -9,7 +9,7 @@
 - **Topics:** `zotero`, `zotero-plugin`, `research`, `deepseek`, `literature-review`, `knowledge-management`, `markdown`, `latex`
 - **License:** MIT；仓库已包含项目许可证与 KaTeX 原许可证。
 
-这份目录已准备好作为仓库根目录。当前尚未替你创建远程仓库或发布 Release。
+项目仓库为 [Ghostvulture/zotero-litthread](https://github.com/Ghostvulture/zotero-litthread)。下方初始化步骤仅适用于新建仓库；现有仓库后续发布从构建发行附件开始。
 
 ## 1. 建立空仓库
 
@@ -21,7 +21,7 @@
 git init -b main
 git add .
 git status
-git commit -m "Prepare LitThread 0.3.3 for open source"
+git commit -m "Prepare LitThread 0.3.4 for open source"
 ```
 
 首次提交需要在自己的电脑配置 Git 提交身份。随后使用 GitHub 新仓库页面提供的真实地址添加远程并推送：
@@ -42,17 +42,17 @@ npm test
 python3 scripts/build.py
 ```
 
-Windows 也可用 `py -3 scripts/build.py`。在 GitHub 创建 `v0.3.3` Release，附上：
+Windows 也可用 `py -3 scripts/build.py`。在 GitHub 创建 `v0.3.4` Release，附上：
 
 ```text
-dist/zotero-litthread-0.3.3.xpi
-dist/zotero-litthread-0.3.3-source.zip
+dist/zotero-litthread-0.3.4.xpi
+dist/zotero-litthread-0.3.4-source.zip
 dist/SHA256SUMS.txt
 ```
 
-Release 标题建议为 **LitThread 0.3.3 · 研脉**。说明可采用下面的文本，并保留实际测试范围：
+Release 标题建议为 **LitThread 0.3.4 · 研脉**。说明可采用下面的文本，并保留实际测试范围：
 
-> LitThread（研脉）是 Research Companion 的开源名称。本版整理了安装、使用和开发文档，并修复拖动侧栏分隔线时的宽度自适应。
+> LitThread（研脉）是 Research Companion 的开源名称。本版修复普通对话遗漏分组材料的问题，支持读取最多六篇同组论文的有限片段用于对照，并省略空记忆和空批注。
 >
 > 保留文章问答、Markdown / LaTeX、回到本轮提问、知识卡片和分组 memory。原有用户直接从文件安装新版 XPI 即可覆盖升级，插件 ID 与数据目录沿用旧版。
 >

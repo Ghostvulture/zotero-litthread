@@ -315,3 +315,26 @@ test("all sources together remain within the message budget including JSON escap
   assert.ok(built.reduce((sum, message) => sum + message.content.length, 0) <= RCAI.LIMITS.total);
   assert.doesNotThrow(() => JSON.parse(built[1].content.slice(built[1].content.indexOf("\n") + 1)));
 });
+
+test("chat includes real peer evidence and omits empty memory and annotations", () => {
+  const built = RCAI.buildMessages({ mode: "chat", question: "对照其他 VLA 文献", annotations: [], memory: "  ",
+    collectionItems: [{ key: "PEER", title: "OpenVLA" }], collectionCoverage: "VLA；直接成员 2 篇",
+    relatedDocuments: [{ item: { key: "PEER", title: "OpenVLA" }, text: "OpenVLA uses a demonstration dataset.", status: "片段" }] });
+  const pack = JSON.parse(built[1].content.split("\n").slice(1).join("\n"));
+  assert.equal(pack.annotations, undefined); assert.equal(pack.memory, undefined);
+  assert.equal(pack.related_documents[0].excerpts[0].source_id, "R1F1");
+  assert.match(pack.related_documents[0].excerpts[0].text, /demonstration/);
+  assert.match(pack.collection_coverage, /VLA/);
+});
+
+test("six peer documents fit alongside all other evidence with escaped metadata", () => {
+  const text = '"\\\n'.repeat(60000);
+  const item = { title: text, abstract: text, creators: text, DOI: text, key: text };
+  const built = RCAI.buildMessages({ question: text, text, item, selection: text, annotations: text, memory: text,
+    history: Array.from({ length: 8 }, () => ({ role: "user", content: text })),
+    collectionItems: Array(100).fill(item), relatedDocuments: Array.from({ length: 6 }, () => ({ item, text, status: text })) });
+  const pack = JSON.parse(built[1].content.split("\n").slice(1).join("\n"));
+  assert.equal(pack.related_documents.length, 6);
+  assert.ok(pack.related_documents.every(doc => doc.excerpts.length));
+  assert.ok(built.reduce((sum, message) => sum + message.content.length, 0) <= RCAI.LIMITS.total);
+});

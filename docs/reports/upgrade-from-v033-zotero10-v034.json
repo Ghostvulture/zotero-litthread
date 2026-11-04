@@ -1,0 +1,138 @@
+{
+  "pluginVersion": "0.3.4",
+  "checks": [
+    {
+      "name": "old-production-addon-active",
+      "passed": true
+    },
+    {
+      "name": "independent-helper-active",
+      "passed": true
+    },
+    {
+      "name": "old-dom-version",
+      "passed": true
+    },
+    {
+      "name": "old-two-view-contexts",
+      "passed": true
+    },
+    {
+      "name": "old-single-stylesheet-menu",
+      "passed": true
+    },
+    {
+      "name": "old-single-root-per-view",
+      "passed": true
+    },
+    {
+      "name": "replacement-package-compatible",
+      "passed": true
+    },
+    {
+      "name": "replacement-manifest-version",
+      "passed": true
+    },
+    {
+      "name": "addon-manager-real-replacement",
+      "passed": true
+    },
+    {
+      "name": "new-addon-manager-version-active",
+      "passed": true
+    },
+    {
+      "name": "helper-survived-same-process",
+      "passed": true
+    },
+    {
+      "name": "old-dom-fully-detached",
+      "passed": true
+    },
+    {
+      "name": "old-sections-fully-detached",
+      "passed": true
+    },
+    {
+      "name": "replacement-sections-have-new-identities",
+      "passed": true
+    },
+    {
+      "name": "no-old-brand-text-remains",
+      "passed": true
+    },
+    {
+      "name": "new-dom-version-every-view",
+      "passed": true
+    },
+    {
+      "name": "new-single-stylesheet",
+      "passed": true
+    },
+    {
+      "name": "new-single-menu",
+      "passed": true
+    },
+    {
+      "name": "new-single-root-per-view",
+      "passed": true
+    },
+    {
+      "name": "new-reader-sidebar-visible",
+      "passed": true
+    },
+    {
+      "name": "new-composer-rounded-18px",
+      "passed": true
+    },
+    {
+      "name": "new-composer-grid-controls",
+      "passed": true
+    },
+    {
+      "name": "new-article-context-chip",
+      "passed": true
+    },
+    {
+      "name": "new-assistant-borderless",
+      "passed": true
+    },
+    {
+      "name": "new-send-circular",
+      "passed": true
+    },
+    {
+      "name": "configuration-sentinel-preserved",
+      "passed": true
+    },
+    {
+      "name": "model-in-every-view-preserved",
+      "passed": true
+    },
+    {
+      "name": "memory-sentinel-byte-preserved",
+      "passed": true
+    },
+    {
+      "name": "conversation-byte-preserved",
+      "passed": true
+    },
+    {
+      "name": "conversation-rendered-after-upgrade",
+      "passed": true
+    },
+    {
+      "name": "settings-shows-target-version",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "complete": true,
+  "launcher": {
+    "exitCode": 0,
+    "timedOut": false,
+    "operatingSystem": "Linux",
+    "singleProcessLaunch": true,
+    "isolatedTemporaryDirectory": "/home/z/Documents/Codex/2026-10-31/zotero7-windows-linux-macos-1-zotero/work/collection-fix-v034/upgrade-z10/tmp"
+  }
+}

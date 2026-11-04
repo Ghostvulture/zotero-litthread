@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "LitThread · 研脉",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "按文献分组积累记忆的 Zotero 阅读助手，兼容 7–10，支持 DeepSeek、段落问答和三级知识卡片。",
   "author": "Research Companion contributors",
   "applications": {

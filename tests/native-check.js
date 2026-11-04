@@ -277,11 +277,14 @@
     const fixture = Zotero.Prefs.get("extensions.research-companion.testPDF", true);
     const attachment = await Zotero.Attachments.importFromFile({ file: fixture, parentItemID: itemID });
     await attachment.loadAllData();
+    const peer = new Zotero.Item("journalArticle"); peer.setField("title", "同组对照论文");
+    peer.setCollections([collectionID]); const peerID = await peer.saveTx();
+    await Zotero.Attachments.importFromFile({ file: PathUtils.join(PathUtils.parent(fixture), "supplement.pdf"), parentItemID: peerID });
     const collections = await companion.data.listCollections();
     const col = collections.find(x => x.id === collectionID);
     check("native-collections", !!col);
     const items = await companion.data.listItems(collectionID);
-    check("native-collection-items", items.length === 1 && items[0].key === item.key);
+    check("native-collection-items", items.length === 2 && items.some(entry => entry.key === item.key));
     const files = await companion.data.attachments(item);
     check("native-attachment-path", files[0]?.exists && files[0]?.path?.endsWith("fixture.pdf"), JSON.stringify(files));
     const text = await companion.data.readText(attachment);
@@ -336,13 +339,18 @@
       view.mode.value = previousComposer.mode; view.mode.dispatchEvent(new win.Event("change", { bubbles: true }));
       view.question.value = previousComposer.question; view.question.dispatchEvent(new win.Event("input", { bubbles: true }));
     }
-    view.question.value = "随机分组为什么有助于因果推断？这项研究的样本量是多少？";
+    view.question.value = "随机分组为什么有助于因果推断？这项研究的样本量是多少？和文件夹中的其他论文对照。";
     view.question.dispatchEvent(new win.Event("input", { bubbles: true }));
     await view.send();
     check("native-chat-request-and-response", view.latest?.content.includes("42"));
     // The mock server records the actual HTTP request, which catches wiring
     // errors between the displayed choice, preferences, and API payload.
     const sentRequest = JSON.parse(await IOUtils.readUTF8(PathUtils.join(PathUtils.parent(out), "request.json")));
+    const material = JSON.parse(sentRequest.messages[1].content.slice(sentRequest.messages[1].content.indexOf("{")));
+    check("native-chat-fresh-collection-catalog", material.collection_items.some(entry => entry.metadata.key === peer.key));
+    check("native-chat-peer-fulltext-in-request", material.related_documents.some(entry => entry.metadata.key === peer.key
+      && entry.excerpts.some(excerpt => excerpt.text.includes("99") && excerpt.source_id.startsWith("R"))));
+    check("native-empty-memory-and-annotations-omitted", !material.memory && !material.annotations);
     check("native-model-used-by-request", sentRequest.model === nextModel.value && sentRequest.model === view.modelSelect.value,
       JSON.stringify({ requestModel: sentRequest.model, selected: view.modelSelect.value }));
     const rendered = Array.from(view.chat.querySelectorAll(".rc-prose")).pop();
