@@ -1,0 +1,14 @@
+{
+  "name": "zotero-litthread",
+  "version": "0.3.3",
+  "private": true,
+  "description": "Zotero 7–10 local collection memory and grounded DeepSeek reading companion",
+  "license": "MIT",
+  "scripts": {
+    "test": "node scripts/test.cjs",
+    "build": "python3 scripts/build.py"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

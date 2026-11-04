@@ -1,0 +1,15 @@
+{
+  "pluginVersion": "0.3.3",
+  "command": "npm test",
+  "passed": 115,
+  "total": 115,
+  "failed": 0,
+  "modules": {
+    "ai": 28,
+    "app-state": 15,
+    "data": 11,
+    "markdown": 28,
+    "math": 19,
+    "memory": 14
+  }
+}

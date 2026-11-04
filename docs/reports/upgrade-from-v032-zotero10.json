@@ -1,0 +1,661 @@
+{
+  "schemaVersion": 1,
+  "zoteroVersion": "10.0.7",
+  "platform": "Linux",
+  "from": {
+    "name": "research-companion-0.3.2.xpi",
+    "id": "research-companion@local.zotero",
+    "version": "0.3.2",
+    "sha256": "5cb2edfe4f874c620808c68055a9f467209fbd86a72899697c3b7e965a6461be",
+    "runtimeSHA256": {
+      "bootstrap.js": "28af38e0533bf50f98e578a72836cf17da2c6317312fc1d29fdfca582006f5d7",
+      "modules/app.js": "288d23a79a7337849ec2051a8263a34697dd8d8f6d9d8fb2c173ff5c9575f8d4",
+      "style.css": "3ae3dcf47df05e74108b1d44f0b70b2bb4c6f15ef2acf3cb56132e5a898c3bcc"
+    }
+  },
+  "to": {
+    "name": "zotero-litthread-0.3.3.xpi",
+    "id": "research-companion@local.zotero",
+    "version": "0.3.3",
+    "sha256": "ce38580088bfab753b3169030dd306cf650b23bb3d0034ed1438bdacdf4fa13c",
+    "runtimeSHA256": {
+      "bootstrap.js": "28af38e0533bf50f98e578a72836cf17da2c6317312fc1d29fdfca582006f5d7",
+      "modules/app.js": "bb01c08b39da059dd5ba8f0ac84f3687301233da228089c0d20db4600488f50a",
+      "style.css": "69789eafc92bfcbb118066ce27fc2d8b87c10fb19db251bc019a3bb4a81211cc"
+    }
+  },
+  "startedAt": "2026-11-04T08:20:54.226Z",
+  "finishedAt": "2026-11-04T08:21:00.527Z",
+  "scope": "One isolated profile, one Zotero process, no real API calls or credentials",
+  "complete": true,
+  "launcher": {
+    "exitCode": 0,
+    "timedOut": false,
+    "operatingSystem": "Linux",
+    "singleProcessLaunch": true
+  },
+  "passed": 31,
+  "total": 31,
+  "checks": [
+    {
+      "name": "old-production-addon-active",
+      "passed": true
+    },
+    {
+      "name": "independent-helper-active",
+      "passed": true
+    },
+    {
+      "name": "old-dom-version",
+      "passed": true
+    },
+    {
+      "name": "old-two-view-contexts",
+      "passed": true
+    },
+    {
+      "name": "old-single-stylesheet-menu",
+      "passed": true
+    },
+    {
+      "name": "old-single-root-per-view",
+      "passed": true
+    },
+    {
+      "name": "replacement-package-compatible",
+      "passed": true
+    },
+    {
+      "name": "replacement-manifest-version",
+      "passed": true
+    },
+    {
+      "name": "addon-manager-real-replacement",
+      "passed": true
+    },
+    {
+      "name": "new-addon-manager-version-active",
+      "passed": true
+    },
+    {
+      "name": "helper-survived-same-process",
+      "passed": true
+    },
+    {
+      "name": "old-dom-fully-detached",
+      "passed": true
+    },
+    {
+      "name": "old-sections-fully-detached",
+      "passed": true
+    },
+    {
+      "name": "replacement-sections-have-new-identities",
+      "passed": true
+    },
+    {
+      "name": "no-old-brand-text-remains",
+      "passed": true
+    },
+    {
+      "name": "new-dom-version-every-view",
+      "passed": true
+    },
+    {
+      "name": "new-single-stylesheet",
+      "passed": true
+    },
+    {
+      "name": "new-single-menu",
+      "passed": true
+    },
+    {
+      "name": "new-single-root-per-view",
+      "passed": true
+    },
+    {
+      "name": "new-reader-sidebar-visible",
+      "passed": true
+    },
+    {
+      "name": "new-composer-rounded-18px",
+      "passed": true
+    },
+    {
+      "name": "new-composer-grid-controls",
+      "passed": true
+    },
+    {
+      "name": "new-article-context-chip",
+      "passed": true
+    },
+    {
+      "name": "new-assistant-borderless",
+      "passed": true
+    },
+    {
+      "name": "new-send-circular",
+      "passed": true
+    },
+    {
+      "name": "configuration-sentinel-preserved",
+      "passed": true
+    },
+    {
+      "name": "model-in-every-view-preserved",
+      "passed": true
+    },
+    {
+      "name": "memory-sentinel-byte-preserved",
+      "passed": true
+    },
+    {
+      "name": "conversation-byte-preserved",
+      "passed": true
+    },
+    {
+      "name": "conversation-rendered-after-upgrade",
+      "passed": true
+    },
+    {
+      "name": "settings-shows-target-version",
+      "passed": true
+    }
+  ],
+  "errors": [],
+  "before": {
+    "rootCount": 2,
+    "stylesheetCount": 1,
+    "menuCount": 1,
+    "views": [
+      {
+        "version": "Research Companion 0.3.2",
+        "visible": false,
+        "computed": {
+          ".rc-composer": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "18px",
+            "borderTopWidth": "1px",
+            "borderTopColor": "rgb(230, 230, 226)",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "10px",
+            "overflowY": "visible",
+            "height": "139.4px",
+            "width": "276px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-composer-controls": {
+            "display": "grid",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 0px",
+            "overflowY": "visible",
+            "height": "37px",
+            "width": "254px",
+            "gridTemplateColumns": "59.4px 156.6px 30px"
+          },
+          ".rc-chat": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "22px 4px 25px",
+            "overflowY": "auto",
+            "height": "602.733px",
+            "width": "276px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-context-chip": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "7px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(109, 109, 104)",
+            "backgroundColor": "rgb(245, 245, 243)",
+            "color": "rgb(109, 109, 104)",
+            "fontSize": "13px",
+            "padding": "3px 6px",
+            "overflowY": "visible",
+            "height": "21.4px",
+            "width": "216px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-toolbar": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 5px",
+            "overflowY": "visible",
+            "height": "42px",
+            "width": "276px",
+            "gridTemplateColumns": "none"
+          },
+          "[aria-label=\"发送问题\"]": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "50%",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(41, 41, 40)",
+            "color": "rgb(255, 255, 255)",
+            "fontSize": "13px",
+            "padding": "7px",
+            "overflowY": "visible",
+            "height": "30px",
+            "width": "30px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-message[data-role=\"user\"]": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "15px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgb(245, 245, 243)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "10px 13px",
+            "overflowY": "visible",
+            "height": "41.45px",
+            "width": "221px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-message[data-role=\"assistant\"]": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "0px",
+            "overflowY": "visible",
+            "height": "270.9px",
+            "width": "268px",
+            "gridTemplateColumns": "none"
+          }
+        }
+      },
+      {
+        "version": "Research Companion 0.3.2",
+        "visible": true,
+        "computed": {
+          ".rc-composer": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "18px",
+            "borderTopWidth": "1px",
+            "borderTopColor": "rgb(230, 230, 226)",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "10px",
+            "overflowY": "visible",
+            "height": "139.4px",
+            "width": "276px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-composer-controls": {
+            "display": "grid",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 0px",
+            "overflowY": "visible",
+            "height": "37px",
+            "width": "254px",
+            "gridTemplateColumns": "59.4px 156.6px 30px"
+          },
+          ".rc-chat": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "22px 4px 25px",
+            "overflowY": "auto",
+            "height": "636.1px",
+            "width": "276px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-context-chip": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "7px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(109, 109, 104)",
+            "backgroundColor": "rgb(245, 245, 243)",
+            "color": "rgb(109, 109, 104)",
+            "fontSize": "13px",
+            "padding": "3px 6px",
+            "overflowY": "visible",
+            "height": "21.4px",
+            "width": "216px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-toolbar": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 5px",
+            "overflowY": "visible",
+            "height": "42px",
+            "width": "276px",
+            "gridTemplateColumns": "none"
+          },
+          "[aria-label=\"发送问题\"]": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "50%",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(41, 41, 40)",
+            "color": "rgb(255, 255, 255)",
+            "fontSize": "13px",
+            "padding": "7px",
+            "overflowY": "visible",
+            "height": "30px",
+            "width": "30px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-message[data-role=\"user\"]": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "15px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgb(245, 245, 243)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "10px 13px",
+            "overflowY": "visible",
+            "height": "41.45px",
+            "width": "221px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-message[data-role=\"assistant\"]": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "0px",
+            "overflowY": "visible",
+            "height": "270.9px",
+            "width": "268px",
+            "gridTemplateColumns": "none"
+          }
+        }
+      }
+    ]
+  },
+  "after": {
+    "rootCount": 2,
+    "stylesheetCount": 1,
+    "menuCount": 1,
+    "views": [
+      {
+        "version": "LitThread 0.3.3",
+        "visible": false,
+        "computed": {
+          ".rc-composer": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "18px",
+            "borderTopWidth": "1px",
+            "borderTopColor": "rgb(230, 230, 226)",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "10px",
+            "overflowY": "visible",
+            "height": "167.8px",
+            "width": "280px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-composer-controls": {
+            "display": "grid",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 0px",
+            "overflowY": "visible",
+            "height": "65.4px",
+            "width": "258px",
+            "gridTemplateColumns": "220px 30px"
+          },
+          ".rc-chat": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "22px 4px 25px",
+            "overflowY": "auto",
+            "height": "547.833px",
+            "width": "280px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-context-chip": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "7px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(109, 109, 104)",
+            "backgroundColor": "rgb(245, 245, 243)",
+            "color": "rgb(109, 109, 104)",
+            "fontSize": "13px",
+            "padding": "3px 6px",
+            "overflowY": "visible",
+            "height": "21.4px",
+            "width": "84px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-toolbar": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 5px",
+            "overflowY": "visible",
+            "height": "42px",
+            "width": "280px",
+            "gridTemplateColumns": "none"
+          },
+          "[aria-label=\"发送问题\"]": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "50%",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(41, 41, 40)",
+            "color": "rgb(255, 255, 255)",
+            "fontSize": "13px",
+            "padding": "7px",
+            "overflowY": "visible",
+            "height": "30px",
+            "width": "30px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-message[data-role=\"user\"]": null,
+          ".rc-message[data-role=\"assistant\"]": null
+        }
+      },
+      {
+        "version": "LitThread 0.3.3",
+        "visible": true,
+        "computed": {
+          ".rc-composer": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "18px",
+            "borderTopWidth": "1px",
+            "borderTopColor": "rgb(230, 230, 226)",
+            "backgroundColor": "rgb(255, 255, 255)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "10px",
+            "overflowY": "visible",
+            "height": "167.8px",
+            "width": "280px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-composer-controls": {
+            "display": "grid",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 0px",
+            "overflowY": "visible",
+            "height": "65.4px",
+            "width": "258px",
+            "gridTemplateColumns": "220px 30px"
+          },
+          ".rc-chat": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "22px 4px 25px",
+            "overflowY": "auto",
+            "height": "607.7px",
+            "width": "280px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-context-chip": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "7px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(109, 109, 104)",
+            "backgroundColor": "rgb(245, 245, 243)",
+            "color": "rgb(109, 109, 104)",
+            "fontSize": "13px",
+            "padding": "3px 6px",
+            "overflowY": "visible",
+            "height": "21.4px",
+            "width": "216px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-toolbar": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "7px 0px 5px",
+            "overflowY": "visible",
+            "height": "42px",
+            "width": "280px",
+            "gridTemplateColumns": "none"
+          },
+          "[aria-label=\"发送问题\"]": {
+            "display": "flex",
+            "position": "static",
+            "borderRadius": "50%",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(255, 255, 255)",
+            "backgroundColor": "rgb(41, 41, 40)",
+            "color": "rgb(255, 255, 255)",
+            "fontSize": "13px",
+            "padding": "7px",
+            "overflowY": "visible",
+            "height": "30px",
+            "width": "30px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-message[data-role=\"user\"]": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "15px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgb(245, 245, 243)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "10px 13px",
+            "overflowY": "visible",
+            "height": "41.45px",
+            "width": "221px",
+            "gridTemplateColumns": "none"
+          },
+          ".rc-message[data-role=\"assistant\"]": {
+            "display": "block",
+            "position": "static",
+            "borderRadius": "0px",
+            "borderTopWidth": "0px",
+            "borderTopColor": "rgb(37, 37, 36)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "color": "rgb(37, 37, 36)",
+            "fontSize": "13px",
+            "padding": "0px",
+            "overflowY": "visible",
+            "height": "270.9px",
+            "width": "272px",
+            "gridTemplateColumns": "none"
+          }
+        }
+      }
+    ]
+  },
+  "limitations": [
+    "Linux native runtime only. Windows CSS rules are simulated, not native Windows execution.",
+    "Windows/macOS and Zotero 8/9 native execution have not been verified.",
+    "Synthetic PDF, responses, credentials and balance; no real DeepSeek account/API validation."
+  ]
+}

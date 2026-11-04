@@ -1,0 +1,36 @@
+name: 功能建议
+description: 说明阅读或研究工作流中的需求
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: 请描述具体使用场景。示例、日志或截图不要包含 API Key、私有文献和未授权的研究资料。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 使用场景与问题
+      placeholder: 你在什么步骤遇到困难？目前如何完成这件事？
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 希望的行为
+      placeholder: 希望增加或改变什么？怎样判断需求已满足？
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 已尝试的替代方法（可选）
+      placeholder: 当前的处理方式，以及仍有哪些不便。
+  - type: input
+    id: environment
+    attributes:
+      label: 相关环境（可选）
+      description: 若需求与平台或版本有关，请填写操作系统、Zotero 完整版本和插件版本。
+  - type: textarea
+    id: context
+    attributes:
+      label: 补充说明或脱敏示例（可选）
+      description: 截图请移除凭据、个人信息、私有文献内容与敏感路径；优先使用公开或合成示例。

@@ -1,0 +1,25 @@
+# Build products: attach these to GitHub Releases.
+/dist/
+*.xpi
+*.zip
+
+# Local tooling and caches
+node_modules/
+__pycache__/
+*.py[cod]
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.log
+
+# Local settings, credentials and disposable test profiles
+.env
+.env.*
+!.env.example
+/work/
+/tmp/
+/profile/
+/data/
+/zotero-profile/
+/research-companion/

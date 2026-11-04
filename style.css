@@ -1,0 +1,192 @@
+/* Quiet, compact desktop conversation surface. All styles remain plugin-scoped. */
+.rc-root {
+  --rc-ink: #252524; --rc-muted: #6d6d68; --rc-faint: #969691; --rc-bg: #ffffff;
+  --rc-soft: #f5f5f3; --rc-hover: #ededea; --rc-line: #e6e6e2; --rc-code: #f7f7f5;
+  --rc-action: #292928; --rc-action-ink: #ffffff; --rc-link: #406b9e;
+  --rc-gutter: 8px; --rc-send-size: 30px;
+  display: flex; flex-direction: column; box-sizing: border-box; height: max(200px, calc(100vh - 210px)); min-height: 200px;
+  width: 100%; min-width: 0; max-width: 100%; contain: inline-size;
+  overflow: hidden; color: var(--rc-ink); background: var(--rc-bg);
+  font: 13px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei UI", system-ui, sans-serif;
+  padding: 0 var(--rc-gutter) 4px; color-scheme: light;
+}
+.rc-root * { box-sizing: border-box; }
+.rc-root [hidden] { display: none !important; }
+.rc-root .rc-icon { display: block; flex-shrink: 0; pointer-events: none; }
+.rc-root .rc-toolbar { display: flex; align-items: center; gap: 3px; flex: 0 0 auto; padding: 7px 0 5px; min-height: 42px; }
+.rc-root .rc-scope { display: grid; grid-template-columns: 16px minmax(0, 1fr) 13px; align-items: center; gap: 6px; flex: 1; min-width: 0; margin-right: 10px; color: var(--rc-muted); }
+.rc-root .rc-scope > .rc-icon { width: 16px; height: 16px; }
+.rc-root .rc-scope > .rc-icon:last-child { margin-left: -3px; width: 13px; }
+.rc-root .rc-scope select { appearance: none; border: 0; background: transparent; padding: 4px 0; font-size: 12px; color: var(--rc-ink); cursor: pointer; text-overflow: ellipsis; }
+.rc-root .rc-chat-page { display: flex; flex-direction: column; flex: 1 1 0; min-height: 0; min-width: 0; }
+.rc-root label { display: flex; flex-direction: column; gap: 7px; color: var(--rc-muted); font-size: 12px; }
+.rc-root .rc-muted { color: var(--rc-muted); font-size: 11px; line-height: 1.65; overflow-wrap: anywhere; }
+.rc-root .rc-row { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; }
+.rc-root button, .rc-root input, .rc-root select, .rc-root textarea {
+  /* Host chrome differs across platforms: Windows caps buttons at 25px and
+     fixes text fields at 26px. Own every control's geometry inside this root. */
+  appearance: none; height: auto; min-height: 0; max-height: none; margin: 0;
+  box-shadow: none; letter-spacing: normal; text-transform: none;
+  font: inherit; color: var(--rc-ink); border: 1px solid var(--rc-line); border-radius: 8px;
+  padding: 7px 10px; background: var(--rc-bg); min-width: 0; max-width: 100%;
+}
+.rc-root input, .rc-root select, .rc-root textarea { width: 100%; }
+.rc-root button { cursor: pointer; transition: background-color .12s, border-color .12s; }
+.rc-root button:hover { background: var(--rc-hover); border-color: var(--rc-line); }
+.rc-root button:disabled { opacity: .35; cursor: default; }
+.rc-root button.rc-primary { background: var(--rc-action); color: var(--rc-action-ink); border-color: transparent; }
+.rc-root button.rc-primary:hover:not(:disabled) { filter: brightness(1.18); }
+.rc-root button:focus-visible, .rc-root input:focus-visible, .rc-root textarea:focus-visible, .rc-root select:focus-visible, .rc-root a:focus-visible, .rc-root summary:focus-visible, .rc-root .rc-chat:focus-visible {
+  outline: 2px solid var(--rc-muted); outline-offset: 2px;
+}
+.rc-root button.rc-icon-button { display: inline-flex; align-items: center; justify-content: center; width: 29px; height: 29px; padding: 5px; border: 0; border-radius: 8px; background: transparent; color: var(--rc-muted); flex-shrink: 0; }
+.rc-root button.rc-icon-button:hover { background: var(--rc-soft); color: var(--rc-ink); }
+.rc-root .rc-toolbar button.rc-icon-button { width: 28px; height: 28px; }
+.rc-root .rc-chat { flex: 1 1 0; min-height: 70px; min-width: 0; overflow-y: auto; overflow-x: hidden; overscroll-behavior: contain; padding: 22px 4px 25px; scrollbar-width: thin; scrollbar-color: var(--rc-line) transparent; }
+.rc-root .rc-message { min-width: 0; max-width: 100%; padding: 0; margin: 0 0 26px; }
+.rc-root .rc-message:last-child { margin-bottom: 4px; }
+.rc-root .rc-message[data-role="user"] { width: fit-content; max-width: calc(100% - 16px); margin-left: auto; border: 0; border-radius: 15px; background: var(--rc-soft); padding: 10px 13px; line-height: 1.65; }
+.rc-root .rc-message-head { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+.rc-root .rc-prose { overflow-wrap: anywhere; min-width: 0; max-width: 100%; user-select: text; }
+.rc-root .rc-message-actions { display: flex; align-items: center; margin-top: 14px; }
+.rc-root button.rc-jump-to-question { display: inline-flex; align-items: center; gap: 5px; padding: 4px 6px; border: 0; background: transparent; color: var(--rc-muted); font-size: 11px; line-height: 1.6; border-radius: 7px; }
+.rc-root button.rc-jump-to-question > .rc-icon { width: 13px; height: 13px; }
+.rc-root button.rc-jump-to-question:hover { background: var(--rc-soft); color: var(--rc-ink); }
+.rc-root .rc-plain-text { white-space: pre-wrap; }
+.rc-root .rc-pending { color: var(--rc-muted); font-size: 12px; padding: 4px 0; }
+.rc-root .rc-pending::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--rc-muted); margin: 0 8px 1px 0; }
+.rc-root .rc-empty { min-height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 12px 8px 34px; }
+.rc-root .rc-empty-icon { display: flex; align-items: center; justify-content: center; color: var(--rc-ink); width: 44px; height: 44px; margin-bottom: 20px; border-radius: 14px; background: var(--rc-soft); }
+.rc-root .rc-empty-icon .rc-icon { width: 23px; height: 23px; stroke-width: 1.5; }
+.rc-root .rc-empty-title { font-size: 20px; font-weight: 550; color: var(--rc-ink); line-height: 1.45; letter-spacing: -.03em; }
+.rc-root .rc-empty p { margin: 9px 0 27px; font-size: 12px; color: var(--rc-muted); white-space: pre-line; line-height: 1.8; }
+.rc-root .rc-prompts { display: flex; flex-direction: column; align-items: stretch; gap: 3px; width: 100%; max-width: 230px; text-align: left; }
+.rc-root .rc-prompts button { display: flex; align-items: center; gap: 10px; width: 100%; border: 0; background: transparent; border-radius: 10px; padding: 9px 10px; font-size: 12px; }
+.rc-root .rc-prompts button > .rc-icon { width: 16px; height: 16px; color: var(--rc-muted); }
+.rc-root .rc-prompts button > span { flex: 1; min-width: 0; overflow-wrap: anywhere; text-align: left; }
+.rc-root .rc-prompts button > .rc-icon:last-child { opacity: .35; width: 14px; }
+.rc-root .rc-prompts button:hover { background: var(--rc-soft); }
+.rc-root .rc-composer { flex: 0 0 auto; min-width: 0; max-width: 100%; border: 1px solid var(--rc-line); border-radius: 18px; margin: 0 0 7px; padding: 10px; background: var(--rc-bg); box-shadow: 0 2px 8px #00000006, 0 1px 2px #00000004; }
+.rc-root .rc-composer:focus-within { border-color: #c8c8c2; box-shadow: 0 2px 10px #00000008; }
+.rc-root .rc-context-chip { display: flex; align-items: center; gap: 5px; width: fit-content; max-width: 100%; background: var(--rc-soft); color: var(--rc-muted); border-radius: 7px; padding: 3px 6px; margin-bottom: 5px; }
+.rc-root .rc-context-chip > .rc-icon { width: 12px; height: 12px; }
+.rc-root .rc-title { font-size: 11px; min-width: 0; max-width: 100%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height: 1.4; }
+.rc-root .rc-composer > textarea { display: block; resize: none; min-height: 54px; height: 54px; max-height: 130px; padding: 6px 2px; border: 0; border-radius: 3px; background: transparent; outline: none; font-size: 13px; line-height: 1.6; }
+.rc-root .rc-composer > textarea::placeholder { color: var(--rc-faint); }
+.rc-root .rc-composer-controls { display: grid; grid-template-columns: minmax(92px, .8fr) minmax(0, 1.2fr) var(--rc-send-size); align-items: center; gap: 6px; min-width: 0; padding-top: 7px; }
+.rc-root .rc-composer-select { position: relative; min-width: 0; color: var(--rc-muted); }
+.rc-root .rc-composer-select > .rc-icon { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 12px; height: 12px; }
+.rc-root .rc-composer-controls select { appearance: none; width: 100%; min-width: 0; border: 0; background-color: transparent; color: var(--rc-muted); font-size: 11px; padding: 5px 14px 5px 0; cursor: pointer; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
+.rc-root .rc-composer-controls select:hover { color: var(--rc-ink); }
+.rc-root .rc-composer-controls button.rc-icon-button { grid-column: 3; grid-row: 1; width: var(--rc-send-size); height: var(--rc-send-size); padding: 7px; background: var(--rc-action); color: var(--rc-action-ink); border-radius: 50%; }
+.rc-root .rc-composer-controls button.rc-icon-button .rc-icon { width: 17px; height: 17px; stroke-width: 2; }
+.rc-root .rc-composer-hint { display: flex; justify-content: space-between; gap: 5px; font-size: 10px; line-height: 1.5; color: var(--rc-muted); padding: 0 4px 4px; flex: 0 0 auto; }
+.rc-root .rc-disclosure { max-width: 44%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+.rc-root .rc-selection-wrap { display: flex; align-items: flex-start; gap: 5px; padding: 5px 2px 6px; }
+.rc-root .rc-selection { flex: 1; min-width: 0; border-left: 2px solid var(--rc-line); padding-left: 7px; max-height: 38px; overflow: auto; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; line-height: 1.6; color: var(--rc-muted); }
+.rc-root .rc-selection-wrap button.rc-icon-button { padding: 3px; width: 20px; height: 20px; }
+.rc-root .rc-selection-wrap .rc-icon { width: 12px; height: 12px; }
+.rc-root .rc-status { flex: 0 0 auto; max-height: 40px; overflow-y: auto; scrollbar-width: thin; padding: 5px 4px; color: var(--rc-muted); white-space: pre-wrap; overflow-wrap: anywhere; font-size: 11px; line-height: 1.5; }
+.rc-root .rc-error { max-height: 70px; color: #a13f35; background: #fcf2f0; border-radius: 8px; padding: 8px; }
+.rc-root .rc-settings-page { flex: 1 1 0; min-height: 0; min-width: 0; max-width: 100%; overflow-y: auto; overflow-x: hidden; overflow-wrap: anywhere; padding: 0 3px 18px; scrollbar-width: thin; scrollbar-color: var(--rc-line) transparent; }
+.rc-root .rc-settings-heading { display: flex; align-items: center; gap: 10px; position: sticky; top: 0; background: var(--rc-bg); z-index: 1; padding: 12px 0 16px; }
+.rc-root .rc-settings-heading h2 { font-size: 17px; font-weight: 600; margin: 0; flex: 1; }
+.rc-root .rc-version { font-size: 10px; color: var(--rc-muted); }
+.rc-root .rc-connection-settings { display: flex; flex-direction: column; gap: 14px; padding: 0 0 10px; }
+.rc-root .rc-connection-settings h3 { margin: 7px 0 0; font-size: 13px; font-weight: 600; }
+.rc-root .rc-settings-page input, .rc-root .rc-settings-page select, .rc-root .rc-settings-page textarea { background: var(--rc-soft); border: 1px solid transparent; padding: 9px 10px; font-size: 12px; border-radius: 9px; }
+.rc-root .rc-settings-page input:focus, .rc-root .rc-settings-page textarea:focus { border-color: var(--rc-line); }
+.rc-root .rc-connection-settings textarea { resize: vertical; min-height: 65px; line-height: 1.6; }
+.rc-root .rc-connection-settings .rc-row button { font-size: 11px; padding: 7px 10px; }
+.rc-root .rc-connection-settings .rc-row button:last-child { border-color: transparent; background: transparent; color: var(--rc-muted); padding: 7px 5px; }
+.rc-root details { border-top: 1px solid var(--rc-line); padding: 14px 0; }
+.rc-root .rc-connection-settings details { padding: 4px 0; border: 0; }
+.rc-root summary { cursor: pointer; font-weight: 500; font-size: 12px; list-style: none; display: flex; align-items: center; gap: 6px; }
+.rc-root summary::before { content: "›"; display: inline-block; width: 10px; font-size: 16px; color: var(--rc-muted); transform-origin: 4px 50%; }
+.rc-root details[open] > summary::before { transform: rotate(90deg); }
+.rc-root details > :not(summary) { margin-top: 11px; }
+.rc-root .rc-file { padding: 9px 0; overflow-wrap: anywhere; }
+.rc-root .rc-path { font: 10px/1.65 ui-monospace, Consolas, monospace; white-space: pre-wrap; user-select: text; overflow-wrap: anywhere; color: var(--rc-muted); }
+.rc-root .rc-items { max-height: 230px; overflow-y: auto; }
+.rc-root .rc-items button { width: 100%; text-align: left; margin: 3px 0; font-size: 12px; white-space: normal; overflow-wrap: anywhere; }
+.rc-root .rc-balance { border: 0; border-radius: 12px; padding: 10px 13px 11px; background: var(--rc-soft); }
+.rc-root .rc-balance-heading { display: flex; justify-content: space-between; align-items: center; gap: 5px; font-size: 11px; color: var(--rc-muted); }
+.rc-root .rc-balance-heading strong { font-weight: 500; }
+.rc-root .rc-balance-content { font-size: 12px; margin: 4px 0; overflow-wrap: anywhere; }
+.rc-root .rc-balance-content .rc-muted { font-size: 11px; }
+.rc-root .rc-balance > .rc-muted { font-size: 10px; }
+.rc-root .rc-balance-total { font-size: 22px; font-weight: 500; font-variant-numeric: tabular-nums; color: var(--rc-ink); letter-spacing: -.035em; margin-bottom: 3px; }
+.rc-root .rc-markdown { min-width: 0; max-width: 100%; white-space: normal; line-height: 1.85; }
+.rc-root .rc-math-inline { display: inline-block; max-width: 100%; overflow-x: auto; overflow-y: hidden; vertical-align: middle; white-space: nowrap; overscroll-behavior: contain; scrollbar-width: thin; }
+.rc-root .rc-math-display { display: block; max-width: 100%; overflow-x: auto; overflow-y: hidden; overscroll-behavior: contain; padding: 9px 2px; margin: 12px 0; scrollbar-width: thin; }
+.rc-root .rc-markdown math { font-size: 1.08em; color: inherit; }
+.rc-root .rc-markdown > :first-child { margin-top: 0; }
+.rc-root .rc-markdown > :last-child { margin-bottom: 0; }
+.rc-root .rc-markdown p { margin: 10px 0; }
+.rc-root .rc-markdown h1, .rc-root .rc-markdown h2, .rc-root .rc-markdown h3, .rc-root .rc-markdown h4, .rc-root .rc-markdown h5, .rc-root .rc-markdown h6 { line-height: 1.6; margin: 21px 0 8px; font-weight: 600; letter-spacing: -.01em; }
+.rc-root .rc-markdown h1 { font-size: 17px; }
+.rc-root .rc-markdown h2 { font-size: 15px; }
+.rc-root .rc-markdown h3 { font-size: 14px; }
+.rc-root .rc-markdown h4, .rc-root .rc-markdown h5, .rc-root .rc-markdown h6 { font-size: 13px; }
+.rc-root .rc-markdown strong { font-weight: 600; }
+.rc-root .rc-markdown ul, .rc-root .rc-markdown ol { padding-left: 20px; margin: 10px 0; }
+.rc-root .rc-markdown li { margin: 7px 0; padding-left: 2px; }
+.rc-root .rc-markdown li p { margin: 4px 0; }
+.rc-root .rc-markdown li::marker { color: var(--rc-muted); }
+.rc-root .rc-markdown blockquote { margin: 14px 0; padding: 1px 0 1px 11px; color: var(--rc-muted); border-left: 2px solid var(--rc-line); }
+.rc-root .rc-markdown code { font: 11px/1.7 ui-monospace, Consolas, "SFMono-Regular", monospace; background: var(--rc-code); padding: 2px 4px; border-radius: 4px; }
+.rc-root .rc-markdown pre { min-width: 0; max-width: 100%; overflow-x: auto; overscroll-behavior: contain; margin: 14px 0; padding: 12px; border: 0; border-radius: 10px; background: var(--rc-code); white-space: pre; scrollbar-width: thin; }
+.rc-root .rc-markdown pre code { padding: 0; background: transparent; white-space: pre; overflow-wrap: normal; }
+.rc-root .rc-md-table-wrap { overflow-x: auto; overscroll-behavior: contain; min-width: 0; max-width: 100%; margin: 14px 0; scrollbar-width: thin; }
+.rc-root .rc-markdown table { border-collapse: collapse; font-size: 11px; width: 100%; }
+.rc-root .rc-markdown th, .rc-root .rc-markdown td { border: 0; border-bottom: 1px solid var(--rc-line); padding: 8px; min-width: 60px; vertical-align: top; text-align: left; }
+.rc-root .rc-markdown th { font-weight: 600; color: var(--rc-muted); }
+.rc-root .rc-markdown a { color: var(--rc-link); text-decoration: underline; text-underline-offset: 3px; }
+.rc-root .rc-md-link-disabled { color: var(--rc-muted); }
+.rc-root .rc-markdown hr { border: 0; border-top: 1px solid var(--rc-line); margin: 20px 0; }
+.rc-root .rc-markdown [data-align="right"] { text-align: right; }
+.rc-root .rc-markdown [data-align="center"] { text-align: center; }
+.rc-root .rc-md-image-placeholder, .rc-root .rc-md-truncated { color: var(--rc-muted); font-size: 11px; }
+.rc-root .rc-md-math-fallback { white-space: pre-wrap; overflow-wrap: anywhere; }
+/* These modes follow the section's measured width, not the application window. */
+.rc-root[data-width-layout="narrow"] { --rc-gutter: 6px; }
+.rc-root[data-width-layout="narrow"] .rc-scope { margin-right: 3px; gap: 4px; }
+.rc-root[data-width-layout="narrow"] .rc-composer-controls { grid-template-columns: minmax(0, 1fr) var(--rc-send-size); gap: 1px 8px; }
+.rc-root[data-width-layout="narrow"] .rc-composer-select[data-control="task"] { grid-column: 1; grid-row: 1; }
+.rc-root[data-width-layout="narrow"] .rc-composer-select[data-control="model"] { grid-column: 1; grid-row: 2; }
+.rc-root[data-width-layout="narrow"] .rc-composer-controls button.rc-icon-button { grid-column: 2; grid-row: 1 / 3; align-self: end; }
+.rc-root[data-width-layout="narrow"] .rc-composer-hint { flex-wrap: wrap; }
+.rc-root[data-width-layout="narrow"] .rc-disclosure { min-width: 0; max-width: 100%; margin-left: auto; }
+.rc-root[data-width-layout="wide"] { --rc-gutter: 16px; --rc-send-size: 34px; }
+.rc-root[data-width-layout="wide"] .rc-toolbar, .rc-root[data-width-layout="wide"] .rc-composer,
+.rc-root[data-width-layout="wide"] .rc-composer-hint { width: 100%; max-width: 760px; align-self: center; }
+.rc-root[data-width-layout="wide"] .rc-chat { padding-left: 12px; padding-right: 12px; }
+.rc-root[data-width-layout="wide"] .rc-message { max-width: 72ch; margin-left: auto; margin-right: auto; }
+.rc-root[data-width-layout="wide"] .rc-message[data-role="user"] { max-width: min(84%, 62ch); margin-right: 0; }
+.rc-root[data-width-layout="wide"] .rc-composer { padding: 13px; }
+.rc-root[data-width-layout="wide"] .rc-composer-controls { grid-template-columns: minmax(110px, .7fr) minmax(0, 1.3fr) var(--rc-send-size); gap: 10px; }
+.rc-root[data-width-layout="wide"] .rc-composer-controls select { font-size: 12px; }
+.rc-root[data-width-layout="wide"] .rc-settings-page { width: 100%; max-width: 720px; align-self: center; }
+@media (prefers-color-scheme: dark) {
+  .rc-root { --rc-ink: #e7e7e3; --rc-muted: #a1a19b; --rc-faint: #797973; --rc-bg: #242423; --rc-soft: #30302e; --rc-hover: #3a3a37; --rc-line: #41413c; --rc-code: #2e2e2b; --rc-action: #e8e8e4; --rc-action-ink: #242423; --rc-link: #9abce5; color-scheme: dark; }
+  .rc-root .rc-composer { box-shadow: 0 2px 8px #00000015; }
+  .rc-root .rc-composer:focus-within { border-color: #66665f; }
+  .rc-root .rc-error { color: #e6a49b; background: #402c29; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rc-root button { transition: none; }
+}
+/* Zotero moves the context pane below the PDF in small windows. */
+.rc-root[data-compact="true"] { --rc-send-size: 26px; }
+.rc-root[data-compact="true"] .rc-toolbar { min-height: 32px; padding: 2px 0; }
+.rc-root[data-compact="true"] .rc-chat { min-height: 35px; padding-top: 10px; padding-bottom: 10px; }
+.rc-root[data-compact="true"] .rc-composer { padding: 7px; margin-bottom: 4px; border-radius: 13px; }
+.rc-root[data-compact="true"] .rc-context-chip { display: none; }
+.rc-root[data-compact="true"] .rc-selection-wrap { padding-top: 0; padding-bottom: 3px; }
+.rc-root[data-compact="true"] .rc-selection { max-height: 18px; }
+.rc-root[data-compact="true"] .rc-composer > textarea { height: 36px; min-height: 36px; padding-top: 3px; }
+.rc-root[data-compact="true"] .rc-composer-controls { padding-top: 3px; }
+.rc-root[data-compact="true"] .rc-composer-controls button.rc-icon-button { padding: 5px; }
+.rc-root[data-compact="true"] .rc-empty { padding-top: 4px; padding-bottom: 12px; }
+.rc-root[data-compact="true"] .rc-empty-icon, .rc-root[data-compact="true"] .rc-empty p { display: none; }
+.rc-root[data-compact="true"] .rc-empty-title { font-size: 15px; margin-bottom: 8px; }

@@ -1,0 +1,28 @@
+{
+  "name": "katex",
+  "version": "0.19.1",
+  "license": "MIT",
+  "metadataURL": "https://registry.npmjs.org/katex/0.19.1",
+  "tarballURL": "https://registry.npmjs.org/katex/-/katex-0.19.1.tgz",
+  "npmIntegrity": "sha512-jG8uKntjSEcm2EpQOh0XturpPuuC9r3Sq5HLHdsFdWZT27E672SF19QEi+of0/YeOy15lDgRhKvr5614uRrEfA==",
+  "tarballSHA256": "24da5a599eb2fcede2e270b99a6ff48bca816beecc95feeb84e8cccbd1bb34fd",
+  "files": {
+    "katex.min.js": {
+      "sourceMember": "package/dist/katex.min.js",
+      "bytes": 273081,
+      "sha256": "fa140498b8cfc8302cbe5e7cb1bdbc1f952bc38b3fa258ede09e73edbf9a74bc"
+    },
+    "LICENSE": {
+      "sourceMember": "package/LICENSE",
+      "bytes": 1107,
+      "sha256": "766ccc1f306c885aa45542a9846bbd0a505b27a0374f146778171c2254ce18e3"
+    }
+  },
+  "documentation": [
+    "https://katex.org/docs/api",
+    "https://katex.org/docs/options",
+    "https://katex.org/docs/security"
+  ],
+  "usage": "Bundled JavaScript only. Public renderToString API with output mathml, no remote assets or KaTeX HTML/CSS/fonts.",
+  "retrievedAt": "2026-11-02"
+}
